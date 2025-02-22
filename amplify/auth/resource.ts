@@ -1,14 +1,14 @@
-// amplify/auth/resource.ts
-import { defineAuth } from '@aws-amplify/backend';
+import { defineAuth, secret } from '@aws-amplify/backend';
 
 export const auth = defineAuth({
   loginWith: {
-    email: true, // Enable email-based login
+    email: true,
     externalProviders: {
       google: {
-        clientId: process.env.GOOGLE_CLIENT_ID || '', // Replace with your Google Client ID
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '', // Replace with your Google Client Secret
+        clientId: secret('GOOGLE_CLIENT_ID'),
+        clientSecret: secret('GOOGLE_CLIENT_SECRET')
       },
-    },
-  },
+      logoutUrls: ['http://localhost:3000/', 'https://main.d2jbdtj5j5j6tc.amplifyapp.com/'],
+    }
+  }
 });
